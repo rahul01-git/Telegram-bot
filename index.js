@@ -25,9 +25,7 @@ bot.command("bitcoin", (ctx) => {
     bot.telegram.sendMessage(ctx.chat.id, message);
   });
 });
-app.use(bot.webhookCallback("/secret-path"));
-bot.telegram.setWebhook(
-  `${process.env.APP_URL}/secret-path`
-);
-bot.launch();
+bot.telegram.setWebhook("https://telegram-bot-five-gamma.vercel.app/updates4u");
+
+app.use(bot.webhookCallback("/updates4u"));
 app.listen(port, () => console.log("Server started on port ", port));
