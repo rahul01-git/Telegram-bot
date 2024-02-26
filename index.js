@@ -29,5 +29,5 @@ app.use(bot.webhookCallback("/secret-path"));
 bot.telegram.setWebhook(
   `${process.env.APP_URL}/secret-path`
 );
-// bot.launch();
+bot.launch();
 app.listen(port, () => console.log("Server started on port ", port));
