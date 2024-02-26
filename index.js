@@ -25,11 +25,13 @@ bot.command("dance", (ctx) => {
 });
 
 bot.command("bitcoin", (ctx) => {
+  bot.telegram.sendMessage(ctx.chat.id, "Fetching the bitcoin rate...");
   axios.get(process.env.CRYPTO_API).then((res) => {
-    const message = `Hello, currently the bitcoin rate in USD is: ${res.data.USD}`;
+    const message = `The current bitcoin rate in USD is: ${res.data.USD}`;
     bot.telegram.sendMessage(ctx.chat.id, message);
   });
 });
+
 bot.telegram.setWebhook(process.env.APP_URL);
 
 app.use(bot.webhookCallback("/updates4u"));
