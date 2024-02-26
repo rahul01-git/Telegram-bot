@@ -19,6 +19,11 @@ bot.command("start", (ctx) => {
     `
   );
 });
+
+bot.command("dance", (ctx) => {
+  bot.telegram.sendMessage(ctx.chat.id, "🕺");
+});
+
 bot.command("bitcoin", (ctx) => {
   axios.get(process.env.CRYPTO_API).then((res) => {
     const message = `Hello, currently the bitcoin rate in USD is: ${res.data.USD}`;
