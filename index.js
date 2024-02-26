@@ -25,7 +25,7 @@ bot.command("bitcoin", (ctx) => {
     bot.telegram.sendMessage(ctx.chat.id, message);
   });
 });
-bot.telegram.setWebhook("https://telegram-bot-five-gamma.vercel.app/updates4u");
+bot.telegram.setWebhook(process.env.APP_URL);
 
 app.use(bot.webhookCallback("/updates4u"));
 app.listen(port, () => console.log("Server started on port ", port));
