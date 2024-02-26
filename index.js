@@ -8,6 +8,7 @@ const app = express();
 app.use(express.static("static"));
 app.use(express.json());
 
+const port = process.env.PORT;
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.command("start", (ctx) => {
@@ -19,12 +20,14 @@ bot.command("start", (ctx) => {
   );
 });
 bot.command("bitcoin", (ctx) => {
-  axios
-    .get(process.env.CRYPTO_API)
-    .then((res) => {
-      const message = `Hello, currently the bitcoin rate in USD is: ${res.data.USD}`;
-      bot.telegram.sendMessage(ctx.chat.id, message);
-    });
+  axios.get(process.env.CRYPTO_API).then((res) => {
+    const message = `Hello, currently the bitcoin rate in USD is: ${res.data.USD}`;
+    bot.telegram.sendMessage(ctx.chat.id, message);
+  });
 });
-
-bot.launch();
+app.use(bot.webhookCallback("/secret-path"));
+bot.telegram.setWebhook(
+  `${process.env.APP_URL}/secret-path`
+);
+// bot.launch();
+app.listen(port, () => console.log("Server started on port ", port));
