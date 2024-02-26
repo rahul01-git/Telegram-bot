@@ -24,12 +24,11 @@ bot.command("dance", (ctx) => {
   bot.telegram.sendMessage(ctx.chat.id, "🕺");
 });
 
-bot.command("bitcoin", (ctx) => {
-  bot.telegram.sendMessage(ctx.chat.id, "Fetching the bitcoin rate...");
-  axios.get(process.env.CRYPTO_API).then((res) => {
-    const message = `The current bitcoin rate in USD is: ${res.data.USD}`;
-    bot.telegram.sendMessage(ctx.chat.id, message);
-  });
+bot.command("bitcoin", async (ctx) => {
+  await bot.telegram.sendMessage(ctx.chat.id, "Fetching the bitcoin rate...");
+  const res = await axios.get(process.env.CRYPTO_API);
+  const message = `The current bitcoin rate in USD is: ${res.data.USD}`;
+  await bot.telegram.sendMessage(ctx.chat.id, message);
 });
 
 bot.telegram.setWebhook(process.env.APP_URL);
